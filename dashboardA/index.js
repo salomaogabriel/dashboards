@@ -1,5 +1,10 @@
-function animateBurguerMenu(burguer) {
-    burguer.classList.toggle("change-burguer-menu");
+function crossMenu() {
+    var burguer = document.getElementById("burguer");
+    burguer.classList.add("change-burguer-menu");
+}
+function burguerMenu() {
+  var burguer = document.getElementById("burguer");
+  burguer.classList.remove("change-burguer-menu");
 }
 function showNavBar() {
   //hide add more icon
@@ -80,13 +85,16 @@ var coll = document.getElementsByClassName("article-title");
 var i;
 
 for (i = 0; i < coll.length; i++) {
+  coll[i].nextElementSibling.style.transform = "scaleY(1)";
   coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
     var content = this.nextElementSibling;
+    var parent = this.parentNode;
     if (content.style.transform === "scaleY(1)") {
+      content.style.height = "0";
       content.style.transform= "scaleY(0)";
     } else {
       content.style.transform= "scaleY(1)";
+      content.style.height = "auto";
 
     }
   });
@@ -106,6 +114,9 @@ function showPage(pageNum) {
   }
   else {
     mostOrderedPizzas.destroy();
+    last7DaysPizzas.destroy();
+    last7DaysProfits.destroy();
+    costPrice.destroy();
   }
 }
 showPage(1);
@@ -113,17 +124,23 @@ showPage(1);
 
 
 // Charts
+
 var mostOrderedPizzas;
+var last7DaysPizzas;
+var last7DaysProfits;
+var costPrice;
 function createCharts() {
  
   var ctx = document.getElementById('mostOrdered').getContext('2d');
+  var ctx1 = document.getElementById('pizzas7days').getContext('2d');
+  var ctx2 = document.getElementById('profits7days').getContext('2d');
+  var ctx3 = document.getElementById('costprice').getContext('2d');
 
 mostOrderedPizzas = new Chart(ctx, {
     type: 'pie',
     data: {
         labels: ['Cheese', 'Veggie', 'Pepperoni', 'Meat', 'Margherita', 'Buffalo'],
         datasets: [{
-            label: '# of Votes',
             data: [1200, 1900, 300, 500, 200, 300],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -143,6 +160,178 @@ mostOrderedPizzas = new Chart(ctx, {
             ],
             borderWidth: 1
         }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Most Ordered Pizzas'
+        }
+      }
     }
 });
+last7DaysPizzas = new Chart(ctx1, {
+  type: 'bar',
+  data: {
+      labels: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] ,
+      datasets: [{
+          label: '# of pizzas Sold',
+          data: [48, 32, 180, 58, 100, 152,153],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Pizzas Ordered in the last 7 days'
+      }
+    },
+    scales: {
+      y: {
+        min: 0,
+        max: 300,
+      }
+    }
+  }
+
+});
+last7DaysProfits = new Chart(ctx2, {
+  type: 'bar',
+  data: {
+      labels: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] ,
+      datasets: [{
+          label: 'Money made last 7 days',
+          data: [672, 587, 1276, 788, 1365, 1922,1948],
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.2)'
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Money made in the last 7 days'
+      }
+    },
+    scales: {
+      y: {
+        min: 0,
+        max: 2000,
+      }
+    }
+  }
+
+});
+
+costPrice = new Chart(ctx3,{
+  type:"line",
+  data: {
+    labels: ['Cheese', 'Veggie', 'Pepperoni', 'Meat', 'Margherita', 'Buffalo'],
+    datasets: [{
+      label:"Cost",
+      data: [3,5,4,4,4,4],
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1,
+      stepped: 'middle'
+    },
+    {
+      label:"Price",
+      data: [28,36,32,32,34,32],
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1,
+      stepped: 'middle'
+    },
+    {
+      label:"Profit",
+      data: [25,31,28,28,30,28],
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+      stepped: 'middle'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Cost Price Relation'
+      }
+    },
+    scales: {
+      y: {
+        min: 0,
+        max: 50,
+      },
+      y1: {
+        min: 0,
+        max: 50,
+        display:false
+      },
+      y2: {
+        min: 0,
+        max: 50,
+        display:false
+
+      }
+    }
+  }
+})
+}
+var isNavOpen = false;
+function openNav() {
+  document.getElementById("sidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "#111";
+  crossMenu()
+  isNavOpen = true;
+  document.getElementsByClassName("mask")[0].classList.remove("hide");
+}
+
+function closeNav() {
+  document.getElementById("sidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+  document.body.style.backgroundColor = "white";
+  burguerMenu()
+  isNavOpen = false;
+  document.getElementsByClassName("mask")[0].classList.add("hide");
+
+
+}
+function toggleNav() {
+  if (isNavOpen) {
+    closeNav();
+  }
+  else {
+    openNav();
+  }
 }

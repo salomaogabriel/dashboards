@@ -4,9 +4,16 @@ Analitico:
 Pizzas mais pedidas:
 Pizzas por dia
 Lucro por dia
+Lucros por pizza
 
 Administração:
 Adicionar Pizza
 Remover Pizza
 Alterar Pizza
+
+
+dashboard Ideas:
+Documentation dashboard like chartjs
+Dashboard for Student Evaluation (List of students with scores, absences) + class Evaluation
+Dashboard for Gaming Performance
 

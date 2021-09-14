@@ -19,83 +19,122 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="bar-menu" onclick="animateBurguerMenu(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-        <img src="dashboardA/pizza.png" alt="Pizza Icon">
-        <h1>John's Pizza</h1>
-    </header>
-    <main>
-        <div class="navBar" onmouseover="showNavBar()" onmouseout="hideNavBar()">
-            <h4 id="navBar-show-more">+</h4>
-            <button class="navBar-Btn" onclick="showPage(1)">Orders</button>
-            <button class="navBar-Btn" onclick="showPage(2)">Analytics</button>
-            <button class="navBar-Btn"onclick="showPage(3)">Admin</button>
-        </div>
-        <!-- Orders -->
+    <div id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">Dashboards</a>
+        <a href="/dashboarda.html">Dashboard A</a>
+        <a href="/dashboardb.html">Dashboard B</a>
+        <a href="/dashboardc.html">Dashboard C</a>
+    </div>
+    <div id="main">
+        <div class="mask hide"></div>
         
-        <section id="1">
-            <h2 class="article-title">Orders Table</h2>
-            <article>
-                <button onclick="sortTable(true)">Sort Asc</button>
-                <button onclick="sortTable(false)">Sort Desc</button>
-                <table id="OrderTable">
-                    <tr>
-                        <th>OrderNo</th>
-                        <th>Customer</th>
-                        <th>Order</th>
-                        <th>Location</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th>Change Status</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>Mussarela</td>
-                        <td>Brazil</td>
-                        <td>2020-10-10</td>
-                        <td>Preparing</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>John Doe</td>
-                        <td>Mussarela</td>
-                        <td>Brazil</td>
-                        <td>2020-10-10</td>
-                        <td>Preparing</td>
-                        <td>1</td>
-                    </tr> 
-                    <tr>
-                        <td>2</td>
-                        <td>John Doe</td>
-                        <td>Mussarela</td>
-                        <td>Brazil</td>
-                        <td>2020-10-10</td>
-                        <td>Preparing</td>
-                        <td>1</td>
-                    </tr>
-                </table>
-            </article>
-        </section>
-        <!-- analytics -->
-        <section id="2">
-            <h2 class="article-title">Most Ordered Pizzas</h2>
-            <article>
-                <figure class="pieChart">
-                    <canvas id="mostOrdered" width="50" height="50"></canvas>
-                </figure>
-            </article>
-        </section>
-        <!-- Admin -->
-        <section id="3">
-            <p>Admin</p>
-        </section>
-    </main>
+        <header>
+            <div class="bar-menu" onclick="toggleNav()" id="burguer">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <img src="dashboardA/pizza.png" alt="Pizza Icon">
+            <h1>John's Pizza</h1>
+        </header>
+        
+        <main>
+            <div class="navBar" onmouseover="showNavBar()" onmouseout="hideNavBar()">
+                <h4 id="navBar-show-more">+</h4>
+                <button class="navBar-Btn" onclick="showPage(1)">Orders</button>
+                <button class="navBar-Btn" onclick="showPage(2)">Analytics</button>
+                <button class="navBar-Btn"onclick="showPage(3)">Admin</button>
+            </div>
+            <!-- Orders -->
+            
+            <section id="1">
+                <h2 class="article-title">Orders Table</h2>
+                <article>
+                    <button onclick="sortTable(true)">Sort Asc</button>
+                    <button onclick="sortTable(false)">Sort Desc</button>
+                    <table id="OrderTable">
+                        <tr>
+                            <th>OrderNo</th>
+                            <th>Customer</th>
+                            <th>Order</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Change Status</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>Mussarela</td>
+                            <td>Brazil</td>
+                            <td>2020-10-10</td>
+                            <td>Preparing</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John Doe</td>
+                            <td>Mussarela</td>
+                            <td>Brazil</td>
+                            <td>2020-10-10</td>
+                            <td>Preparing</td>
+                            <td>1</td>
+                        </tr> 
+                        <tr>
+                            <td>2</td>
+                            <td>John Doe</td>
+                            <td>Mussarela</td>
+                            <td>Brazil</td>
+                            <td>2020-10-10</td>
+                            <td>Preparing</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </article>
+            </section>
+            <!-- analytics -->
+            <section id="2" class="section">
+                <div class="graph">
+                    <h2 class="article-title">Most Ordered Pizzas</h2>
+                    <article>
+                        <figure class="chart">
+                            <canvas id="mostOrdered" width="400px"  height="400px"></canvas>
+                        </figure>
+                    </article>
+                </div>
+                <div class="graph">
+                    <h2 class="article-title">Pizzas Ordered Last 7 days</h2>
+                    <article>
+                        <figure class="chart">
+                            <canvas id="pizzas7days" width="400px"  height="400px"></canvas>
+                        </figure>
+                    </article>
+                </div>
+                <div class="graph">
+                    <h2 class="article-title">Profits from the last 7 days</h2>
+                    <article>
+                        <figure class="chart">
+                            <canvas id="profits7days" width="400px" height="400px"></canvas>
+                        </figure>
+                    </article>
+                </div>
+                <div class="graph">
+                    <h2 class="article-title">Price Cost relation</h2>
+                    <article>
+                        <figure class="chart">
+                            <canvas id="costprice" width="400px" height="400px"></canvas>
+                        </figure>
+                    </article>
+                </div>
+                
+            </section>
+            <!-- Admin -->
+            <section id="3">
+                <p>Admin</p>
+            </section>
+        </main>
+    </div>
     <script src="dashboardA/index.js"></script>
 </body>
 </html>

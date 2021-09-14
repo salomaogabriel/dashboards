@@ -50,7 +50,7 @@ header img {
 }
 main {
     background-color:#f0f0f5;
-    height: 100vh;
+    min-height: 100vh;
     padding-left:5vw;
     padding-right: 5vw;
 }
@@ -83,9 +83,7 @@ main {
     background-color:white;
     color:var(--title-color);
 }
-.hide {
-    display: none;
-}
+
 .show-navbar {
     animation: navBarAnimation 300ms;
     animation-fill-mode: forwards;
@@ -121,16 +119,79 @@ table {
   tr:nth-child(even) {
     background-color: #f0f0f5
   }
-  article-title {
-      display: block;
+  .article-title {
+    display: block;
     transform: scaleY(1);
+    background-color: white;
+    padding:12px;
+    border-bottom:solid 1px #32215356;
+    cursor: pointer;
 
   }
   article {
     transform: scaleY(1);
   transform-origin: top;
   transition: transform 0.26s ease;
+  background-color: white;
+  height: auto;
   }
-  .pieChart {
+  .chart {
       max-width: 400px;
   }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  .mask {
+    background-color: rgba(0,0,0,.4);
+    z-index: 9;
+    width: 100vw;
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100vh;
+
+  }
+  .section {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+    grid-template-rows: auto;
+  }
+  .graph article{
+    display: flex;
+    justify-content: center;
+    padding:20px; 
+  }
+  .hide {
+    display: none;
+}
