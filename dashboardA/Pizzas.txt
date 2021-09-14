@@ -1,0 +1,12 @@
+Pedidos | Ordernar Pedidos por data
+
+Analitico:
+Pizzas mais pedidas:
+Pizzas por dia
+Lucro por dia
+
+Administração:
+Adicionar Pizza
+Remover Pizza
+Alterar Pizza
+

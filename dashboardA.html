@@ -1,0 +1,101 @@
+<!--
+    @Author: Gabriel Salomão
+    @GitHub: https://github.com/salomaogabriel
+    @License MIT License 
+    @Last Modified: 2021-09-08 (YYYY-MM-DD)
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <title>Dashboard A</title>
+    <link rel="stylesheet" href="dashboardA/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="bar-menu" onclick="animateBurguerMenu(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <img src="dashboardA/pizza.png" alt="Pizza Icon">
+        <h1>John's Pizza</h1>
+    </header>
+    <main>
+        <div class="navBar" onmouseover="showNavBar()" onmouseout="hideNavBar()">
+            <h4 id="navBar-show-more">+</h4>
+            <button class="navBar-Btn" onclick="showPage(1)">Orders</button>
+            <button class="navBar-Btn" onclick="showPage(2)">Analytics</button>
+            <button class="navBar-Btn"onclick="showPage(3)">Admin</button>
+        </div>
+        <!-- Orders -->
+        
+        <section id="1">
+            <h2 class="article-title">Orders Table</h2>
+            <article>
+                <button onclick="sortTable(true)">Sort Asc</button>
+                <button onclick="sortTable(false)">Sort Desc</button>
+                <table id="OrderTable">
+                    <tr>
+                        <th>OrderNo</th>
+                        <th>Customer</th>
+                        <th>Order</th>
+                        <th>Location</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Change Status</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>Mussarela</td>
+                        <td>Brazil</td>
+                        <td>2020-10-10</td>
+                        <td>Preparing</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>John Doe</td>
+                        <td>Mussarela</td>
+                        <td>Brazil</td>
+                        <td>2020-10-10</td>
+                        <td>Preparing</td>
+                        <td>1</td>
+                    </tr> 
+                    <tr>
+                        <td>2</td>
+                        <td>John Doe</td>
+                        <td>Mussarela</td>
+                        <td>Brazil</td>
+                        <td>2020-10-10</td>
+                        <td>Preparing</td>
+                        <td>1</td>
+                    </tr>
+                </table>
+            </article>
+        </section>
+        <!-- analytics -->
+        <section id="2">
+            <h2 class="article-title">Most Ordered Pizzas</h2>
+            <article>
+                <figure class="pieChart">
+                    <canvas id="mostOrdered" width="50" height="50"></canvas>
+                </figure>
+            </article>
+        </section>
+        <!-- Admin -->
+        <section id="3">
+            <p>Admin</p>
+        </section>
+    </main>
+    <script src="dashboardA/index.js"></script>
+</body>
+</html>

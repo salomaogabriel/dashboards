@@ -1,0 +1,22 @@
+Alguma preferência de cor primária?
+
+Alguma preferência de tema (Dark/Light)?
+
+Você tem um nome para o projeto/site/empresa?
+
+Você tem alguma Logo ou não precisa?
+
+Alguma preferência de fonte?
+
+Quais informações o dashboard deve ter?
+
+Como os dados devem ser organizados?
+Exemplo:
+Lucro diário - Gráfico de Linha
+Minhas ações - Tabela
+
+Site para usar como referência (se quiser) na hora de escolher os gráficos:
+https://www.chartjs.org/docs/latest/samples/bar/vertical.html
+
+O site será hospedado em seu computador ou em outro?
+
