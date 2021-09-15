@@ -33,10 +33,19 @@ function hideNavBar() {
 
   }, 300)
 }
-
-function sortTable(isAscending) {
+var tableOrder = false;
+var tablePizzas = false;
+function chooseSortTableOrder() {
+  tableOrder = !tableOrder;
+  sortTable(tableOrder,"OrderTable");
+}
+function chooseSortTablePizzas() {
+  tablePizzas = !tablePizzas;
+  sortTable(tablePizzas,"PizzasTable");
+}
+function sortTable(isAscending,tableName) {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("OrderTable");
+  table = document.getElementById(tableName);
   switching = true;
   /* Make a loop that will continue until
   no switching has been done: */
@@ -121,7 +130,29 @@ function showPage(pageNum) {
 }
 showPage(1);
 
+function deleteOrder(orderNo,tableName,needsNotification=false) {
+  table = document.getElementById(tableName);
+  rows = table.rows;
+   
+    for (i = 1; i < (rows.length); i++) {
+      var row = rows[i].getElementsByTagName("TD")[0];
+      if(orderNo == row.innerHTML)
+      {
+       table.deleteRow([i])
+      }
+    }
+    if(needsNotification) {
+      //show notification (Deleted!)
+      document.getElementById("success").classList.remove("hide")
+      document.getElementById("success").classList.add("animation")
+    setTimeout(() => {
+      document.getElementById("success").classList.remove("animation");
+      document.getElementById("success").classList.add("hide")
 
+      
+    }, 4000);
+    }
+}
 
 // Charts
 
@@ -334,4 +365,58 @@ function toggleNav() {
   else {
     openNav();
   }
+}
+function displayError() {
+  document.getElementById("error").classList.remove("hide")
+  document.getElementById("error").classList.add("animation")
+setTimeout(() => {
+  document.getElementById("error").classList.remove("animation");
+  document.getElementById("error").classList.add("hide")
+
+  
+}, 4000);
+}
+function addPizza() {
+  document.getElementById("addPizzaForm").classList.remove("hide")
+}
+
+function dropHandler(ev) {
+  console.log('File(s) dropped');
+
+  // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+  ev.preventDefault();
+
+  if (ev.dataTransfer.items) {
+    // Use a interface DataTransferItemList para acessar o (s) arquivo (s)
+    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+      // Se os itens soltos não forem arquivos, rejeite-os
+      if (ev.dataTransfer.items[i].kind === 'file') {
+        var file = ev.dataTransfer.items[i].getAsFile();
+        previewFile(file)
+      }
+    }
+  } else {
+    // Use a interface DataTransfer para acessar o (s) arquivo (s)
+    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+      console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+    }
+  }
+}
+
+function dragOverHandler(ev) {
+  // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+  ev.preventDefault();
+}
+function previewFile(file) {
+  let reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onloadend = function() {
+    let img = document.getElementById("gallery")
+    img.src = reader.result;
+  }
+}
+function handleFile(files) {
+  files = [...files]
+  files.forEach(previewFile)
+  
 }

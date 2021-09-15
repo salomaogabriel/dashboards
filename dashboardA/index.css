@@ -71,17 +71,16 @@ main {
     font-size: 16px;
     background-color: transparent;
     border-radius: 12px;
-    color: #f0f0f5;
-    background-color: var(--title-color);
+    color: var(--title-color);
+    background-color: white;
     border:0;
     cursor: pointer;
     display: none;
     transition: 500ms;
-    border:solid 4px var(--title-color);
 }
 .navBar button:hover{
-    background-color:white;
-    color:var(--title-color);
+    color:white;
+    background-color:var(--title-color);
 }
 
 .show-navbar {
@@ -106,6 +105,14 @@ table {
     border: 1px solid #fff;
     padding:12px;
     background-color: #fff;
+  }
+  #sortTable {
+    background-color: transparent;
+    border: 0;
+    font-weight: bolder;
+    margin-left:3%;
+    margin-top: 20px;
+    cursor: pointer;
   }
   
   th, td {
@@ -186,6 +193,7 @@ table {
     grid-template-columns: 50% 50%;
     grid-gap: 20px;
     grid-template-rows: auto;
+    margin-bottom:50px;
   }
   .graph article{
     display: flex;
@@ -193,5 +201,167 @@ table {
     padding:20px; 
   }
   .hide {
-    display: none;
+    display: none !important;
+}
+tr td:nth-child(7){
+  color:#4CAF50;
+  text-align: center;
+  cursor: pointer;
+}
+th:nth-child(7)
+{
+  text-align: center;
+}
+#PizzasTable th:nth-child(6) {
+  text-align: center;
+}
+#PizzasTable tr td:nth-child(6) {
+  cursor: pointer;
+  text-align: center;
+  color: #F44336;
+}
+table input {
+  background-color: transparent;
+  border:0;
+}
+table input::placeholder {
+  color: var(--title-color);
+}
+table input:focus {
+  background-color: #32215323;
+}
+.alert {
+  position: fixed;
+  padding:20px;
+  color:white;
+  top:10%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 12px;
+  z-index: 99;
+}
+.animation {
+  animation-name: fadeAway;
+  animation-duration: 4s;
+}
+@keyframes fadeAway {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+#success{
+  background-color: rgb(76, 175, 80);
+}
+#error {
+  background-color: rgb(244, 67, 54);
+}
+#addPizza {
+  margin: 0% 40%;
+  width: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 32px;
+  border:0;
+  cursor: pointer;
+  transition: 500ms;
+  padding:12px;
+}
+#addPizza:hover {
+  background-color: var(--title-color);
+  color: white;
+  border-radius: 12px;
+}
+#addPizzaForm {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 50px;
+  flex-direction: column;
+  padding:30px;
+  border-radius: 12px;
+}
+#addPizzaForm input {
+  background-color: #f0f0f5;
+  /* border:2px solid rgba(0,0,0,.4); */
+  border:0;
+  border-radius: 12px;
+  font-size: 24px;
+  padding:5px;
+  margin:5px;
+}
+#addPizzaForm fieldset {
+  border:0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#addPizzaForm fieldset label {
+ width: 48%;
+}
+#addPizzaForm fieldset input {
+width: 95%;
+border-radius: 12px;
+}
+#addPizzaForm input[type=submit] {
+  background-color: var(--title-color);
+  color: white;
+  cursor: pointer;
+  font-size: 44px;
+  transition: 500ms;
+}
+#addPizzaForm input[type=submit]:hover {
+  color:rgba(255,255,255,0.4);
+  background-color: #281d3d;
+}
+#addPizzaForm h2 {
+  margin-left:20px;
+  margin-bottom: 10px;
+  margin-top:10px;
+}
+#addPizzaForm h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#drop_zone {
+  margin-top: 20px;
+  background-color: rgba(153, 102, 255, 0.2);
+  border:solid 2px rgba(153, 102, 255, 1);
+  border-radius: 12px;
+  height: 200px;
+  margin-bottom:20px;
+  padding:12px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left:10px;
+}
+.button:hover {
+  background: #ddd;
+}
+#gallery {
+  display: flex;
+ margin: auto;
+  width: 30%;
+  border-radius: 50%;
+  border:8px solid rgba(153, 102, 255, 1);
+}
+footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-top:30vh;
+  justify-content: center;
+}
+footer p {
+  margin-right:10px;
 }

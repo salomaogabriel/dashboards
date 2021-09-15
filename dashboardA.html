@@ -14,11 +14,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="dashboardA/pizza.png" type="image/x-icon">
     <title>Dashboard A</title>
     <link rel="stylesheet" href="dashboardA/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 </head>
 <body>
+    <div id="success" class="alert hide">Success Message!</div>
+    <div id="error"  class="alert hide">An error happened!</div>
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/">Dashboards</a>
@@ -41,7 +44,7 @@
         
         <main>
             <div class="navBar" onmouseover="showNavBar()" onmouseout="hideNavBar()">
-                <h4 id="navBar-show-more">+</h4>
+                <h4 id="navBar-show-more" style="font-size:32px;">&#9662;</h4>
                 <button class="navBar-Btn" onclick="showPage(1)">Orders</button>
                 <button class="navBar-Btn" onclick="showPage(2)">Analytics</button>
                 <button class="navBar-Btn"onclick="showPage(3)">Admin</button>
@@ -51,11 +54,12 @@
             <section id="1">
                 <h2 class="article-title">Orders Table</h2>
                 <article>
-                    <button onclick="sortTable(true)">Sort Asc</button>
-                    <button onclick="sortTable(false)">Sort Desc</button>
                     <table id="OrderTable">
                         <tr>
-                            <th>OrderNo</th>
+                            <th>
+                                OrderNo 
+                                <button onclick="chooseSortTableOrder()" id="sortTable">&UpArrowDownArrow;</button>
+                            </th>
                             <th>Customer</th>
                             <th>Order</th>
                             <th>Location</th>
@@ -66,29 +70,47 @@
                         <tr>
                             <td>1</td>
                             <td>John Doe</td>
-                            <td>Mussarela</td>
-                            <td>Brazil</td>
+                            <td>Cheese</td>
+                            <td>Number 4, Privet Drive</td>
                             <td>2020-10-10</td>
                             <td>Preparing</td>
-                            <td>1</td>
+                            <td onclick="deleteOrder(1,'OrderTable')">&#10003</td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>John Doe</td>
-                            <td>Mussarela</td>
-                            <td>Brazil</td>
+                            <td>Cheese</td>
+                            <td>Number 4, Privet Drive</td>
                             <td>2020-10-10</td>
                             <td>Preparing</td>
-                            <td>1</td>
+                            <td onclick="deleteOrder(3,'OrderTable')">&#10003</td>
                         </tr> 
                         <tr>
                             <td>2</td>
                             <td>John Doe</td>
-                            <td>Mussarela</td>
-                            <td>Brazil</td>
+                            <td>Cheese</td>
+                            <td>Number 4, Privet Drive</td>
                             <td>2020-10-10</td>
                             <td>Preparing</td>
-                            <td>1</td>
+                            <td onclick="deleteOrder(2,'OrderTable')">&#10003</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>John Doe</td>
+                            <td>Cheese</td>
+                            <td>Number 4, Privet Drive</td>
+                            <td>2020-10-10</td>
+                            <td>Preparing</td>
+                            <td onclick="deleteOrder(4,'OrderTable')">&#10003</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>John Doe</td>
+                            <td>Cheese</td>
+                            <td>Number 4, Privet Drive</td>
+                            <td>2020-10-10</td>
+                            <td>Preparing</td>
+                            <td onclick="deleteOrder(5,'OrderTable')">&#10003</td>
                         </tr>
                     </table>
                 </article>
@@ -131,8 +153,74 @@
             </section>
             <!-- Admin -->
             <section id="3">
-                <p>Admin</p>
+                <h2 class="article-title">Pizzas</h2>
+                <article>
+                    <table id="PizzasTable">
+                        <tr>
+                            <th>Id  <button onclick="chooseSortTablePizzas()" id="sortTable">&UpArrowDownArrow;</button></th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Cost</th>
+                            <th>Price</th>
+                            <th>Delete</th>
+                            <th>Save Changes</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" placeholder="Margherita"></td>
+                            <td><input type="text" placeholder="Cheese, Tomato, Basil"></td>
+                            <td><input type="text" placeholder="3"></td>
+                            <td><input type="text" placeholder="32"></td>
+                            <td onclick="deleteOrder(1,'PizzasTable',true)">&times;</td>
+                            <td onclick="displayError()">&#10003</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><input type="text" placeholder="Margherita"></td>
+                            <td><input type="text" placeholder="Cheese, Tomato, Basil"></td>
+                            <td><input type="text" placeholder="3"></td>
+                            <td><input type="text" placeholder="32"></td>
+                            <td onclick="deleteOrder(2,'PizzasTable',true)">&times;</td>
+                            <td onclick="displayError()">&#10003</td>
+                        </tr>
+                    </table>
+                </article>
+                <button id="addPizza" onclick="addPizza()">Add Pizza</button>
+                <article id="addPizzaForm" class="hide">
+                    <h1>Add a New Pizza</h1>
+                
+                    <!-- image preview -->
+                    <h2>Pizza Image</h2>
+                
+                    <input type="file" class="hide" id="fileUpload" multiple accept="image/*" onchange="handleFile(this.files)">
+                    <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                        
+                        <p>Drag a file to this drop zone or</p>
+                        <label class="button" for="fileUpload">Select some files</label>
+                    </div>
+                    <img id="gallery" src="dashboardA/pizza.png" alt="Hey" >
+                    <h2>Pizza Name</h2>
+                    <input type="text" name="name">
+                    <h2>Pizza Description</h2>
+                    <input type="text" name="description">
+                    <fieldset>
+                        <label for="">
+                            <h2>Pizza Cost</h2>
+                            <input type="text" name="cost">
+                        </label>
+                        <label for="">
+                            <h2>Pizza Price</h2>
+                            <input type="text" name="price">
+                        </label>
+                    </fieldset>
+                    <input type="submit" value="submit" onclick="displayError()">
+                </article>
             </section>
+            
+        <footer>
+            <p>&copy; Made by Gabriel Salomão </p>
+            <a href="https://github.com/salomaogabriel"><img src="dashboardA/github.png" alt="git hub link"></a>
+        </footer>
         </main>
     </div>
     <script src="dashboardA/index.js"></script>
